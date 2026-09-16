@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Praneel — Builder</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="loader" aria-hidden="true">
+    <div class="loader-grid">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+    </div>
+
+    <div class="loader-meta">
+        <span>PRANEEL / 2026</span>
+        <span class="loader-count">00</span>
+    </div>
+</div>
+
+<main>
+
+    <!-- NAVIGATION -->
+
+    <header class="nav">
+
+        <a href="#home" class="logo" aria-label="Praneel home">
+
+            <span class="logo-mark" aria-hidden="true">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+
+            <span class="logo-text">
+                PRANEEL
+            </span>
+
+        </a>
+
+
+        <nav aria-label="Primary navigation">
+
+            <button
+                class="nav-link active"
+                data-page="home"
+            >
+                HOME
+            </button>
+
+            <button
+                class="nav-link"
+                data-page="projects"
+            >
+                PROJECTS
+            </button>
+
+        </nav>
+
+
+        <span class="nav-year">
+            CA / 2026
+        </span>
+
+    </header>
+
+
+    <!-- HOME -->
+
+    <section
+        class="page home active"
+        id="home"
+    >
+
+        <div class="home-main">
+
+            <div class="home-kicker">
+
+                <span class="status-dot"></span>
+
+                STUDENT / BUILDER / CURIOUS
+
+            </div>
+
+
+            <div class="home-intro">
+
+                <div class="home-index mono">
+                    01
+                </div>
+
+
+                <div class="home-copy">
+
+                    <h1>
+                        I like making
+                        <span>things work.</span>
+                    </h1>
+
+
+                    <p class="home-lead">
+                        I'm Praneel, a student who likes building things at the
+                        intersection of electronics, software, mathematics, and design.
+                    </p>
+
+
+                    <p class="home-secondary">
+                        Most of the time, I'm designing a circuit, writing some code,
+                        or figuring out why the thing I just built decided not to work.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="home-contact">
+
+                <div class="contact-heading-inline">
+
+                    <span class="mono">
+                        CONTACT
+                    </span>
+
+                    <span class="contact-rule"></span>
+
+                </div>
+
+
+                <div class="contact-links-inline">
+
+                    <!-- GITHUB -->
+
+                    <a
+                        href="#"
+                        class="social-link"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="GitHub placeholder link"
+                    >
+
+                        <span class="social-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+
+                                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.17 1.18a11.03 11.03 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.35.78 1.04.78 2.1v3.11c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+
+                            </svg>
+
+                        </span>
+
+                        <span>
+                            GITHUB
+                        </span>
+
+                        <span>
+                            ↗
+                        </span>
+
+                    </a>
+
+
+                    <!-- LINKEDIN -->
+
+                    <a
+                        href="#"
+                        class="social-link"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="LinkedIn placeholder link"
+                    >
+
+                        <span class="social-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+
+                                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V8.98h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.61 0 4.28 2.38 4.28 5.47v6.29ZM5.32 7.42a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM3.54 20.45H7.1V8.98H3.54v11.47ZM22.22 0H1.78C.8 0 0 .8 0 1.78v20.44C0 23.2.8 24 1.78 24h20.44c.98 0 1.78-.8 1.78-1.78V1.78C24 .8 23.2 0 22.22 0Z"/>
+
+                            </svg>
+
+                        </span>
+
+                        <span>
+                            LINKEDIN
+                        </span>
+
+                        <span>
+                            ↗
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="home-bottom">
+
+            <span>
+                CALIFORNIA
+            </span>
+
+            <span class="scroll-hint mono">
+
+                PROJECTS
+
+                <span>
+                    ↓
+                </span>
+
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section
+        class="page projects"
+        id="projects"
+    >
+
+        <div class="section-topline">
+
+            <span class="mono">
+                02 / SELECTED WORK
+            </span>
+
+            <span>
+                Click an entry to read the build log.
+            </span>
+
+        </div>
+
+
+        <div class="section-heading">
+
+            <h2>
+                Build log
+            </h2>
+
+            <p>
+                A running list of hardware, software, and experiments.
+                Each entry opens into the process, technical notes, and code.
+            </p>
+
+        </div>
+
+
+        <div class="project-list">
+
+            <!-- PROJECT 01 -->
+
+            <button
+                class="project"
+                data-project="cpu"
+            >
+
+                <span class="project-number mono">
+                    01
+                </span>
+
+                <span class="project-date mono">
+                    2026
+                </span>
+
+                <span class="project-main">
+
+                    <strong>
+                        8-BIT COMPUTER
+                    </strong>
+
+                    <small>
+                        HARDWARE / DIGITAL LOGIC
+                    </small>
+
+                </span>
+
+                <span class="project-summary">
+                    Breadboard CPU built from logic gates,
+                    registers, an ALU, and 256 bytes of memory.
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
+            </button>
+
+
+            <!-- PROJECT 02 -->
+
+            <button
+                class="project"
+                data-project="imu"
+            >
+
+                <span class="project-number mono">
+                    02
+                </span>
+
+                <span class="project-date mono">
+                    2026
+                </span>
+
+                <span class="project-main">
+
+                    <strong>
+                        IMU VISUALIZER
+                    </strong>
+
+                    <small>
+                        EMBEDDED / 3D
+                    </small>
+
+                </span>
+
+                <span class="project-summary">
+                    Motion hardware streaming orientation data
+                    into a real-time 3D visualizer.
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
+            </button>
+
+
+            <!-- PROJECT 03 -->
+
+            <button
+                class="project"
+                data-project="macropad"
+            >
+
+                <span class="project-number mono">
+                    03
+                </span>
+
+                <span class="project-date mono">
+                    2025
+                </span>
+
+                <span class="project-main">
+
+                    <strong>
+                        MACROPAD
+                    </strong>
+
+                    <small>
+                        HARDWARE / SOFTWARE
+                    </small>
+
+                </span>
+
+                <span class="project-summary">
+                    A compact programmable keyboard designed
+                    around the shortcuts I actually use.
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
+            </button>
+
+
+            <!-- PROJECT 04 -->
+
+            <button
+                class="project"
+                data-project="secret"
+            >
+
+                <span class="project-number mono">
+                    04
+                </span>
+
+                <span class="project-date mono">
+                    2025
+                </span>
+
+                <span class="project-main">
+
+                    <strong>
+                        SECRET BOX
+                    </strong>
+
+                    <small>
+                        DIGITAL LOGIC / MECHANICAL
+                    </small>
+
+                </span>
+
+                <span class="project-summary">
+                    A physical puzzle box with a password,
+                    display, servo lock, and a few secrets.
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECT DETAIL -->
+
+    <section
+        class="project-detail"
+        id="projectDetail"
+        aria-hidden="true"
+    >
+
+        <button
+            class="detail-back"
+            id="detailBack"
+        >
+            ← BACK TO LOG
+        </button>
+
+
+        <div class="detail-top">
+
+            <span
+                class="detail-number mono"
+                id="detailNumber"
+            >
+                01
+            </span>
+
+            <span
+                class="detail-category mono"
+                id="detailCategory"
+            >
+                HARDWARE / 2026
+            </span>
+
+        </div>
+
+
+        <div class="detail-content">
+
+            <div class="detail-title-row">
+
+                <h2 id="detailTitle">
+                    8-BIT COMPUTER
+                </h2>
+
+                <span class="detail-state mono">
+                    BUILD NOTE / 01
+                </span>
+
+            </div>
+
+
+            <div class="detail-grid">
+
+                <article class="detail-description">
+
+                    <p id="detailDescription">
+                        A breadboard computer built from logic gates,
+                        registers, an ALU, and 256 bytes of memory.
+                    </p>
+
+
+                    <div class="detail-notes">
+
+                        <div>
+
+                            <span class="mono">
+                                01
+                            </span>
+
+                            <p id="detailStory">
+                                The goal was to understand a computer
+                                by building the pieces myself instead
+                                of hiding them behind a framework.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <span class="mono">
+                                02
+                            </span>
+
+                            <p id="detailLesson">
+                                The interesting part is the chain of
+                                small decisions that makes the machine work.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <aside class="detail-code-wrap">
+
+                    <div class="code-header">
+
+                        <span class="mono">
+                            SOURCE / EXAMPLE
+                        </span>
+
+                        <button
+                            class="copy-code"
+                            id="copyCode"
+                        >
+                            COPY
+                        </button>
+
+                    </div>
+
+
+                    <pre class="detail-code"><code id="detailCode"></code></pre>
+
+                </aside>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
