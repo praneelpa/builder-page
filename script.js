@@ -2,39 +2,13 @@
    LOADER
 ========================= */
 
-const loader =
-    document.querySelector(".loader");
-
-const loaderCount =
-    document.querySelector(".loader-count");
-
+const loader = document.getElementById("loader");
 
 window.addEventListener("load", () => {
 
-    let count = 0;
-
-    const interval =
-        setInterval(() => {
-
-            count += 20;
-
-            if (loaderCount) {
-                loaderCount.textContent =
-                    String(count).padStart(2, "0");
-            }
-
-            if (count >= 100) {
-                clearInterval(interval);
-            }
-
-        }, 90);
-
-
     setTimeout(() => {
-
         loader.classList.add("hidden");
-
-    }, 850);
+    }, 1200);
 
 });
 
@@ -43,66 +17,52 @@ window.addEventListener("load", () => {
    PAGE NAVIGATION
 ========================= */
 
-const navLinks =
-    document.querySelectorAll(".nav-link");
+const navLinks = document.querySelectorAll(".nav-link, .logo");
+const pages = document.querySelectorAll(".page");
 
-const pages =
-    document.querySelectorAll(".page");
-
-
-function openPage(
-    pageName,
-    updateHash = true
-) {
+function openPage(pageName) {
 
     pages.forEach(page => {
-
-        page.classList.toggle(
-            "active",
-            page.id === pageName
-        );
-
+        page.classList.remove("active");
     });
 
-
-    navLinks.forEach(link => {
-
-        link.classList.toggle(
-            "active",
-            link.dataset.page === pageName
-        );
-
+    document.querySelectorAll(".nav-link").forEach(link => {
+        link.classList.remove("active");
     });
 
+    const page = document.getElementById(pageName);
 
-    if (updateHash) {
+    const link = document.querySelector(
+        `.nav-link[data-page="${pageName}"]`
+    );
 
-        history.replaceState(
-            null,
-            "",
-            `#${pageName}`
-        );
-
+    if (page) {
+        page.classList.add("active");
     }
 
+    if (link) {
+        link.classList.add("active");
+    }
 
-    closeProjectDetail();
-
+    history.replaceState(
+        null,
+        "",
+        `#${pageName}`
+    );
 }
 
 
 navLinks.forEach(link => {
 
-    link.addEventListener(
-        "click",
-        () => {
+    link.addEventListener("click", event => {
 
-            openPage(
-                link.dataset.page
-            );
+        event.preventDefault();
 
-        }
-    );
+        openPage(
+            link.dataset.page
+        );
+
+    });
 
 });
 
@@ -114,199 +74,29 @@ navLinks.forEach(link => {
 const startingPage =
     window.location.hash.substring(1);
 
-
 if (startingPage === "projects") {
-
-    openPage(
-        startingPage,
-        false
-    );
-
-} else {
-
-    openPage(
-        "home",
-        false
-    );
-
+    openPage(startingPage);
 }
 
 
 /* =========================
-   NAV BACKGROUND
+   NAV BACKGROUND ON SCROLL
 ========================= */
 
-const nav =
-    document.querySelector(".nav");
+const nav = document.querySelector(".nav");
 
+pages.forEach(page => {
 
-window.addEventListener("scroll", () => {
+    page.addEventListener("scroll", () => {
 
-    nav.classList.toggle(
-        "scrolled",
-        window.scrollY > 5
-    );
+        nav.classList.toggle(
+            "scrolled",
+            page.scrollTop > 8
+        );
+
+    });
 
 });
-
-
-/* =========================
-   PROJECT DATA
-========================= */
-
-const projectData = {
-
-    cpu: {
-
-        number: "01",
-
-        category:
-            "HARDWARE / DIGITAL LOGIC / 2026",
-
-        title:
-            "8-BIT COMPUTER",
-
-        story:
-            "The goal was to understand a computer by building the pieces myself instead of hiding them behind a framework. The machine is assembled around logic gates, registers, an ALU, a program counter, and memory.",
-
-        lesson:
-            "The interesting part is the chain of small decisions: timing, buses, control signals, instruction decoding, and making every block agree on what a clock cycle actually means.",
-
-        code:
-`// simplified control loop
-
-const uint8_t opcode = instruction >> 4;
-const uint8_t operand = instruction & 0x0F;
-
-switch (opcode) {
-
-    case LOAD:
-        accumulator = memory[operand];
-        break;
-
-    case ADD:
-        accumulator += memory[operand];
-        break;
-
-    case STORE:
-        memory[operand] = accumulator;
-        break;
-}`
-    },
-
-
-    imu: {
-
-        number: "02",
-
-        category:
-            "EMBEDDED / 3D / 2026",
-
-        title:
-            "IMU VISUALIZER",
-
-        story:
-            "A motion sensor becomes useful when the raw numbers turn into something I can see. This project streams orientation data from embedded hardware into a real-time 3D scene.",
-
-        lesson:
-            "The hard part is turning noisy acceleration and angular velocity into stable orientation. Filtering, coordinate systems, and update timing matter just as much as the final rendering.",
-
-        code:
-`// simplified orientation update
-
-const dt =
-    (now - lastTime) / 1000.0;
-
-lastTime = now;
-
-gyroAngle += gyroRate * dt;
-
-// complementary filter
-angle =
-    alpha * gyroAngle +
-    (1 - alpha) * accelAngle;`
-    },
-
-
-    macropad: {
-
-        number: "03",
-
-        category:
-            "HARDWARE / SOFTWARE / 2025",
-
-        title:
-            "MACROPAD",
-
-        story:
-            "A small keyboard built around the shortcuts I actually use. The project ties physical controls, firmware, and the host computer together without adding hardware that does not earn its place.",
-
-        lesson:
-            "Design gets better when the interface starts with a real workflow. The layout, firmware, and enclosure all become easier to reason about when every key has a specific job.",
-
-        code:
-`// simplified key action
-
-if (keyPressed("K1")) {
-
-    sendShortcut([
-        CTRL,
-        SHIFT,
-        "P"
-    ]);
-
-}
-
-if (keyPressed("K2")) {
-
-    sendShortcut([
-        CTRL,
-        "K"
-    ]);
-
-}`
-    },
-
-
-    secret: {
-
-        number: "04",
-
-        category:
-            "DIGITAL LOGIC / MECHANICAL / 2025",
-
-        title:
-            "SECRET BOX",
-
-        story:
-            "A physical puzzle box that combines a password interface, display, servo lock, and a few hidden interactions. The goal was to make the mechanism feel deliberate rather than like electronics placed inside a box.",
-
-        lesson:
-            "Projects like this make software state feel physical. A single state transition can move a servo, change a display, and completely change what the user is allowed to do next.",
-
-        code:
-`// simplified lock state
-
-if (enteredCode === secretCode) {
-
-    unlockServo();
-
-    display("OPEN");
-
-} else {
-
-    attempts--;
-
-    if (attempts <= 0) {
-        lockout();
-    } else {
-        display("TRY AGAIN");
-    }
-
-}`
-    }
-
-};
 
 
 /* =========================
@@ -316,253 +106,115 @@ if (enteredCode === secretCode) {
 const projectButtons =
     document.querySelectorAll(".project");
 
-
 const projectDetail =
-    document.getElementById(
-        "projectDetail"
-    );
-
+    document.getElementById("projectDetail");
 
 const detailBack =
-    document.getElementById(
-        "detailBack"
-    );
-
+    document.getElementById("detailBack");
 
 const detailTitle =
-    document.getElementById(
-        "detailTitle"
-    );
-
-
-const detailNumber =
-    document.getElementById(
-        "detailNumber"
-    );
-
+    document.getElementById("detailTitle");
 
 const detailCategory =
-    document.getElementById(
-        "detailCategory"
-    );
-
+    document.getElementById("detailCategory");
 
 const detailDescription =
-    document.getElementById(
-        "detailDescription"
-    );
-
-
-const detailStory =
-    document.getElementById(
-        "detailStory"
-    );
-
-
-const detailLesson =
-    document.getElementById(
-        "detailLesson"
-    );
-
+    document.getElementById("detailDescription");
 
 const detailCode =
-    document.getElementById(
-        "detailCode"
-    );
+    document.getElementById("detailCode");
 
 
-const copyCode =
-    document.getElementById(
-        "copyCode"
-    );
+/*
+  PROJECT DATA
+  ------------
+  Edit this object to update project content. Each key matches a
+  data-project attribute on a .project button in index.html.
+    title       - shown as the detail page heading
+    category    - short label + year, shown above the title
+    description - first paragraph in the detail view
+    code        - link for the "View code" button (e.g. a GitHub repo)
+*/
+const projectData = {
 
+    cpu: {
+        title: "8-bit computer",
+        category: "Hardware, 2026",
+        description:
+            "A breadboard computer built from logic gates, registers, an ALU, and 256 bytes of memory.",
+        code: "https://github.com/yourusername/8bit-computer"
+    },
 
-/* =========================
-   OPEN PROJECT
-========================= */
+    imu: {
+        title: "IMU visualizer",
+        category: "Embedded, 2026",
+        description:
+            "Custom motion hardware streaming orientation data into a real-time 3D visualization.",
+        code: "https://github.com/yourusername/imu-visualizer"
+    },
 
-function openProject(
-    projectName
-) {
+    macropad: {
+        title: "Macropad",
+        category: "Hardware, software, 2025",
+        description:
+            "A small programmable keyboard designed around the shortcuts I actually use.",
+        code: "https://github.com/yourusername/macropad"
+    },
 
-    const data =
-        projectData[projectName];
+    secret: {
+        title: "Secret box",
+        category: "Digital logic, 2025",
+        description:
+            "A physical puzzle box with a password, display, servo lock, and a few secrets.",
+        code: "https://github.com/yourusername/secret-box"
+    }
 
-
-    if (!data) return;
-
-
-    detailNumber.textContent =
-        data.number;
-
-
-    detailCategory.textContent =
-        data.category;
-
-
-    detailTitle.textContent =
-        data.title;
-
-
-    detailDescription.textContent =
-        data.story;
-
-
-    detailStory.textContent =
-        data.story;
-
-
-    detailLesson.textContent =
-        data.lesson;
-
-
-    detailCode.textContent =
-        data.code;
-
-
-    projectDetail.classList.add(
-        "active"
-    );
-
-
-    projectDetail.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-
-    projectDetail.scrollTop = 0;
-
-}
-
-
-/* =========================
-   CLOSE PROJECT
-========================= */
-
-function closeProjectDetail() {
-
-    projectDetail.classList.remove(
-        "active"
-    );
-
-
-    projectDetail.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-}
+};
 
 
 projectButtons.forEach(project => {
 
-    project.addEventListener(
-        "click",
-        () => {
+    project.addEventListener("click", () => {
 
-            openProject(
+        const data =
+            projectData[
                 project.dataset.project
-            );
+            ];
 
-        }
-    );
+        if (!data) return;
+
+        detailCategory.textContent = data.category;
+        detailTitle.textContent = data.title;
+        detailDescription.textContent = data.description;
+        detailCode.href = data.code || "#";
+
+        projectDetail.classList.add("active");
+
+    });
 
 });
 
 
-detailBack.addEventListener(
-    "click",
-    closeProjectDetail
-);
+detailBack.addEventListener("click", () => {
 
+    projectDetail.classList.remove("active");
 
-/* =========================
-   COPY CODE
-========================= */
-
-copyCode.addEventListener(
-    "click",
-    async () => {
-
-        const original =
-            copyCode.textContent;
-
-
-        try {
-
-            await navigator.clipboard.writeText(
-                detailCode.textContent
-            );
-
-
-            copyCode.textContent =
-                "COPIED";
-
-
-            setTimeout(() => {
-
-                copyCode.textContent =
-                    original;
-
-            }, 1200);
-
-
-        } catch {
-
-            copyCode.textContent =
-                "SELECT";
-
-
-            setTimeout(() => {
-
-                copyCode.textContent =
-                    original;
-
-            }, 1200);
-
-        }
-
-    }
-);
+});
 
 
 /* =========================
    ESCAPE
 ========================= */
 
-document.addEventListener(
-    "keydown",
-    event => {
+document.addEventListener("keydown", event => {
 
-        if (
-            event.key === "Escape" &&
-            projectDetail.classList.contains(
-                "active"
-            )
-        ) {
+    if (
+        event.key === "Escape" &&
+        projectDetail.classList.contains("active")
+    ) {
 
-            closeProjectDetail();
-
-        }
+        projectDetail.classList.remove("active");
 
     }
-);
 
-
-/* =========================
-   HOME PROJECT SHORTCUT
-========================= */
-
-document
-    .querySelector(".scroll-hint")
-    ?.addEventListener(
-        "click",
-        () => {
-
-            openPage(
-                "projects"
-            );
-
-        }
-    );
+});
