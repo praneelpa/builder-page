@@ -135,9 +135,11 @@ main {
 
 }
 .home h1 {
-    font-size: 45px;
+    max-width: 600px;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
     font-weight: 600;
-    letter-spacing: -1.8px;
+    line-height: 1.15;
+    letter-spacing: -2px;
 }
 .intro {
     max-width: 550px;
@@ -192,4 +194,115 @@ main {
 
 .project:hover .project-name {
     color: var(--accent);
+}
+
+@media (max-width: 700px) {
+    .nav {
+        height: 68px;
+        padding: 0 20px;
+    }
+    .nav nav {
+        gap: 20px;
+    }
+    .nav-year {
+        display: none;
+    }
+    .page {
+        padding: 68px 20px 38px;
+    }
+    .home-content {
+        margin-left: 0;
+    }
+    .home h1 {
+        font-size: 40px;
+    }
+    .intro {
+        font-size: 15px;
+    }
+    .projects-content {
+        margin-top: 80px;
+    }
+    .projects h2 {
+        font-size: 40px;
+    }
+    .project {
+        grid-template-columns: 40px 1fr 55px;
+        padding: 18px 2px;
+    }
+    .project-name {
+        font-size: 15px;
+    }
+    .home-contact {
+        margin-top: 32px;
+    }
+    .home-bottom {
+        left: 20px;
+        bottom: 25px;
+    }
+    .contact-links {
+        gap: 18px;
+    }
+}
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+.intro + .intro {
+    margin-top: 14px;
+}
+.home-contact {
+    margin-top: 42px;
+    padding-top: 25px;
+    border-top: 1px solid var(--line);
+}
+.home-contact-label {
+    display: block;
+    margin-bottom: 15px;
+    color: var(--gray);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+.contact-links {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+.contact-link {
+    position: relative;
+    color: var(--white);
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+.contact-link:hover {
+    color: var(--accent);
+}
+.contact-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+.contact-link:hover::after {
+    width: 100%;
+}
+.home {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.home-bottom {
+    position: absolute;
+    left: 8%;
+    bottom: -100px;
+    color: var(--gray);
+    font-size: 12px;
 }
