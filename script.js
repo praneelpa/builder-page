@@ -2,6 +2,34 @@ console.log("JS IS RUNNING");
 console.log("Current hash:", window.location.hash);
 const navLinks = document.querySelectorAll(".nav-link");
 const pages = document.querySelectorAll(".page");
+const projectButtons = document.querySelectorAll(".project");
+const projectList = document.querySelector(".project-list");
+const projectDetail = document.querySelector(".project-detail");
+const backButton = document.querySelector(".back-button");
+const projectDetailNumber = document.querySelector(".project-detail-number");
+
+function openProject(projectNumber) {
+    projectList.style.display = "none";
+    projectDetail.style.display = "block";
+    projectDetailNumber.textContent = projectNumber;
+}
+projectButtons.forEach(button => {
+    button.addEventListener(
+        "click",
+        () => {
+            const projectNumber = button.dataset.project;
+            openProject(projectNumber);
+        }
+    );
+});
+backButton.addEventListener(
+    "click",
+    () => {
+        projectList.style.display = "block";
+        projectDetail.style.display = "none";
+    }
+);
+
 function openPage(pageName) {
     pages.forEach(page => {
         page.classList.remove("active");

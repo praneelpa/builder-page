@@ -170,7 +170,7 @@ main {
     text-align: left;
     border-top: 1px solid var(--line);
     color: var(--gray);
-    transition: color 0.3s ease
+    transition: color 0.3s ease,
                 padding 0.3s ease;
 }
 .project:last-child {
@@ -193,6 +193,61 @@ main {
 }
 
 .project:hover .project-name {
+    color: var(--accent);
+}
+.project-detail {
+    display: none;
+    max-width: 650px;
+    margin-top: 45px;
+}
+.project-detail-number {
+    color: var(--gray);
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+.project-detail-name {
+    color: var(--white);
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: -1px;
+}
+.project-detail-description {
+    max-width: 600px;
+    margin-top: 20px;
+    color: var(--gray);
+    font-size: 16px;
+    line-height: 1.7;
+}
+.project-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+.project-tags span {
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    color: var(--gray);
+    font-size: 11px;
+}
+.project-image {
+    width: 100%;
+    height: 300px;
+    margin-top: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--line);
+    color: var(--gray);
+    font-size: 12px;
+}
+.back-button {
+    margin-bottom: 35px;
+    color: var(--gray);
+    font-size: 13px;
+    transition: color 0.3s ease;
+}
+.back-button:hover {
     color: var(--accent);
 }
 
@@ -241,6 +296,18 @@ main {
     }
     .contact-links {
         gap: 18px;
+    }
+    .project-detail {
+        margin-top: 35px;
+    }
+    .project-detail-name {
+        font-size: 30px;
+    }
+    .project-detail-description {
+        font-size: 15px;
+    }
+    .project-image {
+        height: 220px;
     }
 }
 .status-dot {
@@ -302,7 +369,8 @@ main {
 .home-bottom {
     position: absolute;
     left: 8%;
-    bottom: -100px;
+    bottom: -40px;
     color: var(--gray);
     font-size: 12px;
 }
+
