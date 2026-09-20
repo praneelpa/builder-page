@@ -7,6 +7,9 @@
         content="width=device-width, initial-scale=1.0"
     >
     <title>My Builder Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link
         rel="stylesheet"
         href="styles.css"
@@ -41,7 +44,7 @@
             class="page home active"
             id="home"
         >
-            <div class="home-content">
+            <div class="home-intro">
                 <p class="eyebrow">
                     <span class="status-dot"></span>
                     Student · Builder
@@ -58,30 +61,41 @@
                     out why it isn't working.
                 </p>
             </div>
-            <div class="home-bottom">
-                <span>California</span>
-            </div>
             <div class="home-contact">
                 <span class="home-contact-label">
                     Contact
                 </span>
                 <div class="contact-links">
                     <a
-                        href="#"
+                        href="https://github.com/praneelpa"
                         class="contact-link"
-                    >GitHub
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span class="contact-icon contact-icon--github" aria-hidden="true"></span>
+                        <span>GitHub</span>
                     </a>
                     <a
-                        href="#"
+                        href="https://linkedin.com/in/praneelpa"
                         class="contact-link"
-                    >LinkedIn
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span class="contact-icon contact-icon--linkedin" aria-hidden="true">in</span>
+                        <span>LinkedIn</span>
                     </a>
                     <a
-                        href="#"
+                        href="mailto:praneelpatel0@gmail.com"
                         class="contact-link"
-                    >Email
+                    >
+                        <span class="contact-icon contact-icon--mail" aria-hidden="true">&#9993;</span>
+                        <span>Email</span>
                     </a>
                 </div>
+            </div>
+            <div class="home-bottom">
+                <span class="home-bottom-line"></span>
+                <span>California</span>
             </div>
         </section>
 <!--Body for the home stuff Ends-->

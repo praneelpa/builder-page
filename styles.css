@@ -128,6 +128,9 @@ main {
     width: min(650px, 100%);
     margin-left: 8%;
 }
+.home-intro {
+    max-width: 600px;
+}
 .eyebrow {
     margin-bottom: 20px;
     color: var(--gray);
@@ -136,16 +139,16 @@ main {
 }
 .home h1 {
     max-width: 600px;
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 600;
     line-height: 1.15;
-    letter-spacing: -2px;
+    letter-spacing: -1.5px;
 }
 .intro {
     max-width: 550px;
-    margin-top: 25px;
+    margin-top: 22px;
     color: var(--gray);
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.7;
 }
 .projects-content {
@@ -198,7 +201,7 @@ main {
 .project-detail {
     display: none;
     max-width: 800px;
-    margin-top: 45px auto 0;
+    margin: 45px auto 0;
 }
 .project-detail-number {
     color: var(--gray);
@@ -304,6 +307,7 @@ main {
     }
     .home-contact {
         margin-top: 32px;
+        width: 100%
     }
     .home-bottom {
         left: 20px;
@@ -340,13 +344,14 @@ main {
     margin-top: 14px;
 }
 .home-contact {
-    margin-top: 42px;
-    padding-top: 25px;
+    width: min(550px, 100%);
+    margin-top: 40px;
+    padding-top: 22px;
     border-top: 1px solid var(--line);
 }
 .home-contact-label {
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     color: var(--gray);
     font-size: 12px;
     text-transform: uppercase;
@@ -359,9 +364,49 @@ main {
 }
 .contact-link {
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 2px;
+    margin: -6px -2px;
     color: var(--white);
     font-size: 14px;
     transition: color 0.3s ease;
+}
+.contact-icon {
+    flex-shrink: 0;
+}
+.contact-icon--github {
+    width: 15px;
+    height: 15px;
+    background-color: currentColor;
+    -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg");
+    mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
+
+}
+.contact-icon--linkedin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border: 1px solid currentColor;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    transition: border-color 0.3s ease;
+}
+.contact-icon--mail {
+    font-size: 15px;
+    line-height: 1;
 }
 .contact-link:hover {
     color: var(--accent);
@@ -369,26 +414,40 @@ main {
 .contact-link::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: -5px;
+    left: 2px;
+    bottom: -1px;
     width: 0;
     height: 1px;
     background: var(--accent);
     transition: width 0.3s ease;
 }
 .contact-link:hover::after {
-    width: 100%;
+    width: calc(100%-4px);
+}
+a:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
+}
+a:focus:not(:focus-visible), 
+button:focus:not(:focus-visible) {
+    outline: none;
 }
 .home {
-    position: relative;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 .home-bottom {
     position: absolute;
     left: 8%;
-    bottom: -40px;
+    bottom: 40px;
     color: var(--gray);
     font-size: 12px;
+}
+.home-bottom-line {
+    width: 20px;
+    height: 1px;
+    background: var(--line);
 }
 

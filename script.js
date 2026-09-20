@@ -31,6 +31,7 @@ const projectData = {
     }
 };
 const navLinks = document.querySelectorAll(".nav-link");
+const logo = document.querySelector(".logo");
 const pages = document.querySelectorAll(".page");
 const projectButtons = document.querySelectorAll(".project");
 const projectList = document.querySelector(".project-list");
@@ -94,11 +95,11 @@ function openPage(pageName) {
     if (link) {
         link.classList.add("active");
     }
-    //history.replaceState(
-    //   null,
-    //    "",
-     //   `#${pageName}`
-    //);
+    history.replaceState(
+       null,
+        "",
+       `#${pageName}`
+    );
 }
 
 navLinks.forEach(link => {
@@ -109,6 +110,13 @@ navLinks.forEach(link => {
         }
     );
 });
+logo.addEventListener(
+    "click",
+    event => {
+        event.preventDefault();
+        openPage(logo.dataset.page);
+    }
+);
 
 const startingPage = window.location.hash.substring(1);
 if (
@@ -117,15 +125,3 @@ if (
 ) { 
     openPage(startingPage);
 }
-const contactLinks = document.querySelectorAll(".contact-link");
-contactLinks.forEach(link => {
-    link.addEventListener(
-        "click",
-        event => {
-            if (link.getAttribute("href") === "#"){
-                event.preventDefault();
-                console.log(`${link.textContent.trim()} link clicked`);
-            }
-        }
-    );
-});
