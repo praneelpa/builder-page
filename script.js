@@ -1,3 +1,54 @@
+const loadingScreen = document.getElementById("loading-screen");
+const loadingPercent = document.querySelector(".loading-percent");
+
+function setLoadingProgress(percent) {
+    if (!loadingPercent) return;
+    const clamped = Math.min(100, Math.max(0, Math.round(percent)));
+    loadingPercent.textContent = `${clamped}%`;
+}
+function hideLoadingScreen() {
+    if (!loadingScreen) return;
+    setLoadingProgress(100);
+    loadingScreen.classList.add("is-hidden");
+    loadingScreen.addEventListener(
+        "transitionend",
+        () => {
+            loadingScreen.remove();
+        },
+        {once: true}
+    );
+}
+function trackImageLoad(img) {
+    if (img.complete) {
+        return Promise.resolve();
+    }
+    return new Promise(resolve => {
+        img.addEventListener("load", resolve, {once: true});
+        img.addEventListener("error", resolve, {once: true});
+    });
+}
+function waitForPageReady() {
+    const images = Array.from(document.querySelectorAll("img"));
+    const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    const totalTasks = images.length + 1;
+    let completedTasks = 0;
+    function taskDone() {
+        completedTasks += 1;
+        setLoadingProgress((completedTasks / totalTasks) * 100);
+    }
+    const imageTasks = images.map(img => trackImageLoad(img).then(taskDone));
+    const fontTask = fontsReady.then(taskDone);
+    return Promise.all([...imageTasks, fontTask]);
+}
+if (document.readyState == "complete") {
+    hideLoadingScreen();
+} else {
+    waitForPageReady().then(hideLoadingScreen);
+    window.addEventListener("load", hideLoadingScreen, {once: true});
+}
+
+
+
 console.log("JS IS RUNNING");
 console.log("Current hash:", window.location.hash);
 const projectData = {
