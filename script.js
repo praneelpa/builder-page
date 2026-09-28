@@ -56,36 +56,34 @@ const projectData = {
         name: "Macropad",
         year: "2025",
         description: "A custom macropad designed for macOS and the keyboard shortcuts I use most often. It has six programmable keys, with each key supporting both tap and hold actions to trigger different shortcuts. The macropad is built around a XIAO RP2040 and uses KMK firmware to handle the key inputs and custom shortcuts. For a detailed description with code and PCB schematics, check out my GitHub page!!",
-        tags: ["Raspberry Pi", "Python", "Hardware"],
+        tags: ["RP2040", "KMK", "Hardware"],
         image: "images/project-01.png",
-        code: "code/macropad.txt"
+        code: "code/macropad.txt",
+        link: "https://github.com/praneelpa/Macropad"
     },
     "02": {
-        name: "Project 2",
-        year: "2025",
-        description: "Description for Project 2",
-        tags: ["Tag", "Tag", "Tag"],
-        image: "images/project-02.png"
+        name: "SAP-X CPU",
+        year: "2026",
+        description: "A CPU on breadboard that has many functionalities. It can read and write data along with everything else a 16-bit CPU can do. (IN PROGRESS!!!)",
+        tags: ["Computer Architecture", "Breadboard", "Hardware"],
+        link: "https://github.com/praneelpa/sap-x-cpu"
     },
     "03": {
         name: "Project 3",
         year: "2026",
         description: "Description for Project 3",
         tags: ["Tag", "Tag", "Tag"],
-        image: "images/project-03.png"
     },
     "04": {
         name: "Project 4",
         year: "2025",
         description: "Description for Project 4",
         tags: ["Tag", "Tag", "Tag"],
-        image: "images/project-04.png"
     }
 };
 const navLinks = document.querySelectorAll(".nav-link");
 const logo = document.querySelector(".logo");
 const pages = document.querySelectorAll(".page");
-const projectButtons = document.querySelectorAll(".project");
 const projectList = document.querySelector(".project-list");
 const projectDetail = document.querySelector(".project-detail");
 const backButton = document.querySelector(".back-button");
@@ -98,6 +96,8 @@ const projectDetailImage = document.querySelector(".project-detail-image");
 const projectCode = document.querySelector(".project-code");
 const projectCodeContent = document.querySelector(".project-code-content");
 const copyCodeButton = document.querySelector(".copy-code");
+const projectDetailLink = document.querySelector(".project-detail-link");
+const projectImageContainer = document.querySelector(".project-image");
 
 
 function openProject(projectNumber) {
@@ -114,34 +114,68 @@ function openProject(projectNumber) {
         tagElement.textContent = tag;
         projectTags.appendChild(tagElement);
     });
+    if (project.link) {
+        projectDetailLink.href=project.link;
+        projectDetailLink.hidden = false;
+    } else{
+        projectDetailLink.hidden=true;
+    }
+    projectImageContainer.classList.add("is-empty");
     projectDetailImage.src = project.image;
     projectDetailImage.alt = project.name;
     if (project.code) {
         projectCode.hidden = false;
         projectCodeContent.textContent = project.code;
         fetch(project.code)
-            .then(response=>response.text())
-            .then(code=> {
+            .then(response=>{
+                if (!response.ok) {
+                    throw new Error(`Failed to load code: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(code=>{
                 projectCodeContent.textContent=code;
             })
-            .catch(()=> {
-                projectCodeContent.textContent = "Error loading code.";
+            .catch(()=>{
+                projectCodeContent.textContent="Could not load code.";
             });
     } else {
         projectCode.hidden = true;
         projectCodeContent.textContent = "";
     }
-
 }
-projectButtons.forEach(button => {
-    button.addEventListener(
-        "click",
-        () => {
-            const projectNumber = button.dataset.project;
-            openProject(projectNumber);
-        }
-    );
+function renderProjectList() {
+    Object.keys(projectData).forEach(projectNumber => {
+        const project = projectData[projectNumber];
+        const button = document.createElement("button");
+        button.className = "project";
+        button.dataset.project = projectNumber;
+        const numberSpan = document.createElement("span");
+        numberSpan.className = "project-number";
+        numberSpan.textContent = projectNumber;
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "project-name";
+        nameSpan.textContent = project.name;
+        const yearSpan = document.createElement("span");
+        yearSpan.className = "project-year";
+        yearSpan.textContent = project.year;
+        button.append(numberSpan, nameSpan, yearSpan);
+        button.addEventListener("click", ()=> openProject(projectNumber));
+        projectList.appendChild(button);
+    });
+}
+renderProjectList();
+
+projectDetailImage.addEventListener("load", () => {
+    if (projectDetailImage.getAttribute("src")) {
+        projectImageContainer.classList.remove("is-empty");
+    }
 });
+projectDetailImage.addEventListener("error", ()=> {
+    projectImageContainer.classList.add("is-empty");
+});
+
+
 backButton.addEventListener(
     "click",
     () => {
@@ -196,8 +230,10 @@ if (
     openPage(startingPage);
 }
 copyCodeButton.addEventListener("click", async () => {
+    try{
     await navigator.clipboard.writeText(projectCodeContent.textContent);
     copyCodeButton.textContent="Copied";
+    } catch { copyCodeButton.textContent = "Copy error.";}
     setTimeout(()=> {
         copyCodeButton.textContent = "Copy";
     }, 1500);
