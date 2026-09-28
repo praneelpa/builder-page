@@ -53,11 +53,12 @@ console.log("JS IS RUNNING");
 console.log("Current hash:", window.location.hash);
 const projectData = {
     "01": {
-        name: "Project 1",
-        year: "2026",
-        description: "Description for Project 1",
-        tags: ["Tag", "Tag", "Tag"],
-        image: "images/project-01.png"
+        name: "Macropad",
+        year: "2025",
+        description: "A custom macropad designed for macOS and the keyboard shortcuts I use most often. It has six programmable keys, with each key supporting both tap and hold actions to trigger different shortcuts. The macropad is built around a XIAO RP2040 and uses KMK firmware to handle the key inputs and custom shortcuts. For a detailed description with code and PCB schematics, check out my GitHub page!!",
+        tags: ["Raspberry Pi", "Python", "Hardware"],
+        image: "images/project-01.png",
+        code: "code/macropad.txt"
     },
     "02": {
         name: "Project 2",
@@ -94,6 +95,9 @@ const projectDetailName = document.querySelector(".project-detail-name");
 const projectDetailDescription = document.querySelector(".project-detail-description");
 const projectTags = document.querySelector(".project-tags");
 const projectDetailImage = document.querySelector(".project-detail-image");
+const projectCode = document.querySelector(".project-code");
+const projectCodeContent = document.querySelector(".project-code-content");
+const copyCodeButton = document.querySelector(".copy-code");
 
 
 function openProject(projectNumber) {
@@ -112,6 +116,21 @@ function openProject(projectNumber) {
     });
     projectDetailImage.src = project.image;
     projectDetailImage.alt = project.name;
+    if (project.code) {
+        projectCode.hidden = false;
+        projectCodeContent.textContent = project.code;
+        fetch(project.code)
+            .then(response=>response.text())
+            .then(code=> {
+                projectCodeContent.textContent=code;
+            })
+            .catch(()=> {
+                projectCodeContent.textContent = "Error loading code.";
+            });
+    } else {
+        projectCode.hidden = true;
+        projectCodeContent.textContent = "";
+    }
 
 }
 projectButtons.forEach(button => {
@@ -176,3 +195,10 @@ if (
 ) { 
     openPage(startingPage);
 }
+copyCodeButton.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(projectCodeContent.textContent);
+    copyCodeButton.textContent="Copied";
+    setTimeout(()=> {
+        copyCodeButton.textContent = "Copy";
+    }, 1500);
+});
