@@ -69,16 +69,18 @@ const projectData = {
         link: "https://github.com/praneelpa/sap-x-cpu"
     },
     "03": {
-        name: "Project 3",
-        year: "2026",
-        description: "Description for Project 3",
-        tags: ["Tag", "Tag", "Tag"],
+        name: "Wireless Battlebot",
+        year: "2024",
+        description: "A joystick controlled wireless battlebot designed to fight other battlebots. It has a ramp on the front, which is used to knock other battlebots off the plaform if the battleboat runs at full speed. It includes an Arduino, nRF24L01 transceivers for wireless communication, and other basic parts. I haven't made a GitHub for this since this was something I worked on informally, so I didn't document it. The image of the battlebot is below!!",
+        tags: ["Arduino", "Robotics/RC", "Hardware"],
+        image: "images/battlebot.png"
     },
     "04": {
-        name: "Project 4",
+        name: "Music Box",
         year: "2025",
-        description: "Description for Project 4",
-        tags: ["Tag", "Tag", "Tag"],
+        description: "A music box with two buttons and a Piezo buzzer, so it plays music when the button is pressed. There are two buttons, one for each music track. The music tracks are easily changable with just a bit of code change, but for now they include the Harry Potter and Super Mario theme songs. I made this using an Arduino, a buzzer, and a 3D printed case. Picture below!",
+        tags: ["Arduino", "Embedded Systems", "Hardware"],
+        image: "images/music.png"
     }
 };
 const navLinks = document.querySelectorAll(".nav-link");
